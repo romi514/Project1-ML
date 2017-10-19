@@ -9,8 +9,8 @@ def least_squares(y, tx):
     gram = (tx.transpose()).dot(tx)
     b = (tx.transpose()).dot(y) 
     w = np.linalg.solve(gram,b)
-    mse = compute_mse(y,tx,w)
-    return mse, w
+    losses = compute_loss(y,tx,w)
+    return losses, w
 
 
 #Linear regression using gradient descent
