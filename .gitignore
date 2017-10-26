@@ -1,2 +1,3 @@
-data/
+Code/train.csv
+Code/test.csv
 .DS_Store
