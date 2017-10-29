@@ -56,22 +56,22 @@ def least_squares_GD(y, tx, initial_w, max_iters, gamma):
     return losses, ws
 
 # Linear regression using stochastic gradient descent
+
 def least_squares_SGD(y, tx, initial_w, max_iters, gamma):
     "Stochastic gradient descent algorithm "
     
-    batch_size = 1
-    # Define parameters to store w and loss
+    batch_size = 50
     ws = [initial_w]
     losses = []
     w = initial_w
     for n_iter in range(max_iters):
         for minibatch_y, minibatch_tx in batch_iter(y, tx, batch_size):
             gradient = compute_gradient(minibatch_y,minibatch_tx,w)
-        loss = compute_loss(y, tx, w)
-        w = w - (gamma*gradient)
-        ws.append(w)
-        losses.append(loss)
-    
+            loss = compute_loss(minibatch_y,minibatch_tx,w)
+            w = w - (gamma*gradient)
+            ws.append(w)
+            losses.append(loss)
+            
     return losses, ws
 
 # Change variable batch_size ? take away loss + weight tracking through algo? implement MAE loss with subgradient descente ?
@@ -193,4 +193,28 @@ def reg_logistic_regression_with_Newton(y, tx, lambda_, initial_w, max_iters, ga
 
 # Keep only one regularized function with/without Newton ? (lambda = 0 for normal regression)
 
+def logistic_regression_with_Batch(y, tx, initial_w, max_iters, gamma):
+    """ Logistic regression using gradient descent, Newton method and mini-batches"""
+    
+    # init parameters
+    batch_size = 40
+    threshold = 1e-8
+    ws = [initial_w]
+    losses = []
+    w = initial_w
+    
+    for n_iter in range(max_iters):
+        for minibatch_y, minibatch_tx in batch_iter(y, tx, batch_size):
+            gradient = compute_gradient(minibatch_y,minibatch_tx,w)
+            loss = compute_loss(minibatch_y,minibatch_tx,w)
+            hessian = calculate_hessian(minibatch_y,minibatch_tx,w)
+            w = w - np.linalg.inv(hessian).dot(gradient)
+            ws.append(w)
+            # converge criterion
+            losses.append(loss)
+            if len(losses) > 1 and np.abs(losses[-1] - losses[-2]) < threshold:
+                break
+                
 
+    
+    return losses, ws
