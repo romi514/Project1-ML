@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def clean_data(input_data,y,ids, test=False):
+def clean_data(input_data,y,idsn,test = False):
 
     # Seperate in 4 different batches according to PRI_jet_num
     jet_feature_num = 22
@@ -29,13 +29,14 @@ def clean_data(input_data,y,ids, test=False):
 
 
     # Deletes the outliers of the standardized data above the threshold in absolute value
-    if (test == False):
-        threshold = 10; 
+    
+    if (not(test)):
+        threshold = 10
 
-        tx0, y0 = delete_outliers(tx0,y0,threshold)
-        tx1, y1 = delete_outliers(tx1,y1,threshold)
-        tx2, y2 = delete_outliers(tx2,y2,threshold)
-        tx3, y3 = delete_outliers(tx3,y3,threshold)
+        tx0, y0, ids0 = delete_outliers(tx0,y0,ids0,threshold)
+        tx1, y1, ids1 = delete_outliers(tx1,y1,ids1,threshold)
+        tx2, y2, ids2 = delete_outliers(tx2,y2,ids2,threshold)
+        tx3, y3, ids3 = delete_outliers(tx3,y3,ids3,threshold)
 
     return tx0, tx1, tx2, tx3, y0, y1, y2, y3, ids0, ids1, ids2, ids3
 
@@ -69,11 +70,12 @@ def standardize(x):
     return x
 
 
-def delete_outliers(data, y, threshold):
+def delete_outliers(data, y, ids, threshold):
     """ Deletes standardized data points which have at least one value above the threshold """
     idxs = np.all(abs(data)<threshold,1)
 
     data_clean = data[idxs,:]
     y_clean = y[idxs]
+    ids = ids[idxs]
 
-    return data_clean, y_clean
+    return data_clean, y_clean, ids
