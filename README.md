@@ -8,8 +8,8 @@ The file run.py implements the Ridge regression model.
 The file run_v2.py implements the Logistic regression model.
 
 • To get the submission.csv file, run
-
-    python run.py
+    
+    python run.py
 
 • To get the accuracy of your predictions, you can split the dataset to obtain a training set and a testing set. The training set will be used to train the model. The testing set will be used to estimate the accuracy of the prediction. 
 
