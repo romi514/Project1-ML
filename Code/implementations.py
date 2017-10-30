@@ -137,6 +137,7 @@ def logistic_regression(y, tx, initial_w, max_iters, gamma):
         loss = calculate_loss(y,tx,w)
         gradient = calculate_gradient(y,tx,w)
         w = w - gamma*gradient
+        ws.append(w)
         
         # converge criterion
         losses.append(loss)
@@ -160,7 +161,8 @@ def logistic_regression_with_Newton(y, tx, initial_w, max_iters, gamma):
         hessian = calculate_hessian(y,tx,w)
         
         w = w - np.linalg.inv(hess).dot(grad)
-        
+        ws.append(w)
+
         # converge criterion
         losses.append(loss)
         if len(losses) > 1 and np.abs(losses[-1] - losses[-2]) < threshold:
@@ -168,7 +170,7 @@ def logistic_regression_with_Newton(y, tx, initial_w, max_iters, gamma):
     
     return losses, ws
 
-def reg_logistic_regression_with_Newton(y, tx, lambda_, initial_w, max_iters, gamma):
+def reg_logistic_regression(y, tx, lambda_, initial_w, max_iters, gamma):
     """ Penalized logistic regression using gradient descent and Newton method"""
     
     # init parameters
@@ -183,7 +185,8 @@ def reg_logistic_regression_with_Newton(y, tx, lambda_, initial_w, max_iters, ga
         hessian = calculate_hessian(y,tx,w) + lambda_*np.eye(w.shape[0])
         
         w = w - np.linalg.inv(hess).dot(grad)
-        
+        ws.append(w)
+
         # converge criterion
         losses.append(loss)
         if len(losses) > 1 and np.abs(losses[-1] - losses[-2]) < threshold:

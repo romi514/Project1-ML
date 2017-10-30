@@ -38,7 +38,7 @@ def clean_data(input_data,y,ids,test = False):
         tx2, y2, ids2 = delete_outliers(tx2,y2,ids2,threshold)
         tx3, y3, ids3 = delete_outliers(tx3,y3,ids3,threshold)
 
-    return tx0, tx1, tx2, tx3, y0, y1, y2, y3, ids0, ids1, ids2, ids3
+    return [[tx0,y0,ids0], [tx1,y1,ids1], [tx2,y2,ids2], [tx3,y3,ids3]]
 
 
 def delete_redundant_features(data):

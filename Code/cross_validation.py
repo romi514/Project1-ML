@@ -3,7 +3,7 @@
 import csv
 import numpy as np
 from implementations import *
-from poly_reg import build_poly_f
+from helpers import build_poly_f
 
 
 def build_k_indices(y, k_fold, seed):
@@ -42,8 +42,8 @@ def cross_validation(y, x, k_indices, k, lambda_,degree):
     return w,loss_tr, loss_te
 
 def best_lambda(y,tx,deg):
-    seed = 1
-    k_fold = 5
+    seed = 10
+    k_fold = 4
     lambdas = [0.0000001, 0.000001,0.00001,0.0001,0.001,0.01,0.1]
     degree =deg
     # split data in k fold
@@ -66,7 +66,7 @@ def best_lambda(y,tx,deg):
 
 
 def best_degree(y,tx, l):
-    seed = 1
+    seed = 10
     k_fold = 10
     lambda_ = l
     degrees = np.linspace(1,7,7)
@@ -87,5 +87,10 @@ def best_degree(y,tx, l):
 
     return int(degrees[rmse_te.index(np.min(rmse_te))])
 
-
-
+# Score the predictions
+def find_score(y,y_pred):
+    count = 0
+    for i in range(len(y_pred)):
+        if(y_pred[i] == y[i]):
+            count = count + 1       
+    return (count/len(y_pred))
