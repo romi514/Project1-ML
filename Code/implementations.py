@@ -16,11 +16,6 @@ def compute_loss(y, tx, w):
     return L
 
 
-"""
-    Least squares
-"""
-
-
 # Least squares regression using normal equations
 def least_squares(y, tx):
     """calculate the least squares solution."""
@@ -31,7 +26,7 @@ def least_squares(y, tx):
     return losses, w
 
 
-#Linear regression using gradient descent
+# Linear regression using gradient descent
 def compute_gradient(y, tx, w):
     """Compute the gradient for MSE Loss"""
     e = y - tx.dot(w)
@@ -60,7 +55,7 @@ def least_squares_GD(y, tx, initial_w, max_iters, gamma):
 def least_squares_SGD(y, tx, initial_w, max_iters, gamma):
     "Stochastic gradient descent algorithm "
     
-    batch_size = 50
+    batch_size = 1
     ws = [initial_w]
     losses = []
     w = initial_w
@@ -73,9 +68,6 @@ def least_squares_SGD(y, tx, initial_w, max_iters, gamma):
             losses.append(loss)
             
     return losses, ws
-
-# Change variable batch_size ? take away loss + weight tracking through algo? implement MAE loss with subgradient descente ?
-
 
 
 """

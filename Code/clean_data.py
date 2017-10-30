@@ -1,9 +1,10 @@
-import numpy as np
+# -*- coding: utf-8 -*-
 
+import numpy as np
 
 def clean_data(input_data,y,ids,test = False):
 
-    # Seperate in 4 different batches according to PRI_jet_num
+    # Seperate in 4 different batches according to PRI_jet_num (0,1,2,3)
     jet_feature_num = 22
 
     tx0, y0, ids0 = filter_(input_data,y,ids,jet_feature_num,0)

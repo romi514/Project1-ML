@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""some helper functions for project 1."""
+"""some helper functions """
+
 import csv
 import numpy as np
 
@@ -9,7 +10,6 @@ def split_data(x, y, ids, ratio, seed=1):
     you will have 80% of your data set dedicated to training 
     and the rest dedicated to testing
     """
-    # set seed
     size = len(y)
     np.random.seed(seed)
     n = int(ratio*size)
@@ -34,6 +34,7 @@ def build_poly(x, degree):
     return phi
 
 def build_poly_f(x, degrees):
+    """builds polynomial basis for each feature"""
     tx = np.ones(len(x))
     d = degrees
     for i in range(x.shape[1]):
@@ -82,9 +83,6 @@ def batch_iter(y, tx, batch_size, num_batches=1, shuffle=True):
     Takes as input two iterables (here the output desired values 'y' and the input data 'tx')
     Outputs an iterator which gives mini-batches of `batch_size` matching elements from `y` and `tx`.
     Data can be randomly shuffled to avoid ordering in the original data messing with the randomness of the minibatches.
-    Example of use :
-    for minibatch_y, minibatch_tx in batch_iter(y, tx, 32):
-        <DO-SOMETHING>
     """
     data_size = len(y)
 

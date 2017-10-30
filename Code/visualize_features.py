@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Feature Selection Aide
 # Visualizes the correlation between different features of given data
 import numpy as np
