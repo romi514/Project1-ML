@@ -1,5 +1,4 @@
-# Project1-ML
-Machine Learning course - Class project 1 - Master EPFL
+__Machine Learning course - Class project 1 - Master EPFL__
 
 Bahej Inès, Elketroussi Besma, Leteurtre Romain
 
