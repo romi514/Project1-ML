@@ -14,7 +14,9 @@ python run.py
 In run.py, choose the seed 'seed' 'and the ratio 'ratio' of the data you will use to train your model (between 0 and 1),: 
 
 submission = False
+
 train_ration = 'ratio'
+
 ratio = 'ratio'
 
 
