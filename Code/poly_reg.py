@@ -4,7 +4,7 @@ import csv
 import numpy as np
 from implementations import *
 
-def split_data(x, y, ratio, seed=1):
+def split_data(x, y, ids, ratio, seed=1):
     """
     split the dataset based on the split ratio. If ratio is 0.8 
     you will have 80% of your data set dedicated to training 
@@ -18,12 +18,14 @@ def split_data(x, y, ratio, seed=1):
 
     x_train = x[index[:n]]
     y_train = y[index[:n]]
+    ids_train= ids[index[:n]]
     
     x_test = x[index[n:]]
     y_test = y[index[n:]]
+    ids_test = ids[index[n:]]
     
     
-    return x_train, y_train, x_test, y_test
+    return x_train, y_train, x_test, y_test, ids_train, ids_test
 
 def build_poly(x, degree):
     """polynomial basis functions for input data x, for j=0 up to j=degree."""

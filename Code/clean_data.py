@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def clean_data(input_data,y,idsn,test = False):
+def clean_data(input_data,y,ids,test = False):
 
     # Seperate in 4 different batches according to PRI_jet_num
     jet_feature_num = 22

@@ -41,11 +41,11 @@ def cross_validation(y, x, k_indices, k, lambda_,degree):
     loss_te = np.sqrt(2 * compute_loss(y_test, tx_test, w))  
     return w,loss_tr, loss_te
 
-def best_lambda(y,tx):
+def best_lambda(y,tx,deg):
     seed = 1
     k_fold = 5
     lambdas = [0.0000001, 0.000001,0.00001,0.0001,0.001,0.01,0.1]
-    degree = 5
+    degree =deg
     # split data in k fold
     k_indices = build_k_indices(y, k_fold, seed)
     # define lists to store the loss of training data and test data
@@ -85,7 +85,7 @@ def best_degree(y,tx, l):
         rmse_tr.append(np.mean(rmse_train))
         rmse_te.append(np.mean(rmse_test))
 
-    return degrees[rmse_te.index(np.min(rmse_te))]
+    return int(degrees[rmse_te.index(np.min(rmse_te))])
 
 
 
